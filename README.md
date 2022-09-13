@@ -1,4 +1,5 @@
-# ethereum-2.0-validator-setup-guide
+# WIP
+
 Ultimate guide about the ethereum 2.0 validator setup
 # Ethereum 2.0 resources
 
