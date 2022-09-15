@@ -1,4 +1,5 @@
-# WIP
+# How to setup a fast and secure Ethereum 2.0 validator node with OVHcloud
+
 
 Ultimate guide about the ethereum 2.0 validator setup
 # Ethereum 2.0 resources
