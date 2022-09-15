@@ -56,9 +56,11 @@ Go to https://www.ovhcloud.com/en/bare-metal/prices/
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190447790-cf0b5d81-8ecb-4513-b1c8-b65549ed58ca.png">
 
-Advance-1 gen2 for fast sync and Rise-1 for medium sync speed, you can decide 
+Advance-1 gen2 for **fast sync** and Rise-1 for **medium sync** speed, you can decide 
 
-We have chosen Advance-1 Gen2 with 1Gbit/s unmetered, guaranteed traffic and enough disk space to keep up with the chain increase for a while. 
+>**Note**
+> We have chosen Advance-1 Gen2 with 1Gbit/s unmetered, guaranteed traffic and 
+> enough disk space to keep up with the chain increase for a while. 
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190448972-0b325283-0cdb-4795-8599-3099db19aab2.png">
 
@@ -733,7 +735,7 @@ sudo systemctl status beacon-chain
 ### 5.2 Updating your execution client
 
 Stop your execution client process.
-# This can take a few minutes.
+**This can take a few minutes.**
 ```
 sudo systemctl stop eth1
 ```
@@ -751,7 +753,6 @@ sudo systemctl status eth1 beacon-chain validator
 sudo systemctl status eth1 beacon-chain
 ```
 
-
 ## 6. Signing up to be a validator 
 
 To be an ETH 2.0 validator, one has to make a deposit through the launchpad’s website.
@@ -759,13 +760,29 @@ To be an ETH 2.0 validator, one has to make a deposit through the launchpad’s 
 https://launchpad.ethereum.org/en/overview
 
 ### 6.1	Check all steps before connecting to the launchpad with your Metamask wallet, review and accept terms.
+<img width="1040" alt="Screenshot 2022-09-15 at 21 15 33" src="https://user-images.githubusercontent.com/33572557/190490012-7fc14e86-5ae2-495d-939a-b945e3d29411.png">
 
 ### 6.2	Deposit your validator amount 
 
+![image](https://user-images.githubusercontent.com/33572557/190490631-53489650-d7fb-4b08-8615-a4e3df58f160.png)
+
+### 6.3 Follow on beaconcha.in the status
+
+![image](https://user-images.githubusercontent.com/33572557/190491124-6d865694-ecd9-4928-877a-159908f46817.png)
+
+>
+> 🎉 You are now officially an Ethereum 2.0 validator, congrats! 🎉
+>
 
 ## 7. Validator duties 
 
+A validators is required to
 
+* propose new blocks on shards to which the validator is assigned.
+* Participate in committees by signing attestations on blocks proposed by other validators within the committee.
+* Aggregrate attestations from other validators on a committee when assigned for broadcasting to the beacon chain.
+* Maintain an RPC connection to a trusted beacon node to listen for validator assignment/shuffling.
+* Sync assigned shard with beacon chain for each proof of custody period.
 
 
 ## Resources
