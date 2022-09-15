@@ -34,20 +34,21 @@ First solution, buy equipment optimized for our needs and run it at home.
 | Optimal participation to decentralization | Equipment maintenance  |
 | Physical security | Risk of having unsuitable equipment  |
 
-
-
-As explained above, we do not yet know what the final specs will be once the full roadmap goes into production. 
 Using a dedicated server
-Benefits:
-•	Electrical, network, and hardware security 
-•	Upgradability
-•	No additional cost on your electricity bill
-Disadvantages:
-•	Premium to pay
-Dedicated servers are generally more expensive in the long run than buying hardware and hosting it yourself. But let’s see how it turns out in the calculation.
-•	Money invested is wasted
-•	Less decentralization but mostly 99% up-time
-•	Physical attack surface (OVH has no access to dedicated servers)
+
+| :white_check_mark: Benefits  | :x: Disadvantages |
+| ------------- | ------------- |
+| Electrical, network, and hardware security  | Premium to pay  |
+| Upgradability | Money invested is wasted |
+| No additional cost on your electricity bill | Less decentralization but mostly 99% up-time  |
+| Physical security | Risk of having unsuitable equipment  |
+
+Regarding physical security: https://docs.ovh.com/gb/en/dedicated/securing-a-dedicated-server/
+### 1.3 Buy a dedicated server
+
+Go to https://www.ovhcloud.com/en/bare-metal/prices/![image](https://user-images.githubusercontent.com/33572557/190447376-5e168bc4-17b3-4cef-b231-b2c382e96883.png)
+
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190447406-dbb77299-1632-4c54-a223-3e3b655ee025.png">
 
 
 
