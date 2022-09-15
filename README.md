@@ -1,6 +1,6 @@
 # How to setup a fast and secure Ethereum 2.0 validator node with OVHcloud
 
-https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fchainsulting%2Fethereum-2.0-validator-setup-guide
+![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fchainsulting%2Fethereum-2.0-validator-setup-guide) ![](https://img.shields.io/github/issues/chainsulting/ethereum-2.0-validator-setup-guide) ![](https://img.shields.io/github/forks/chainsulting/ethereum-2.0-validator-setup-guide) ![](https://img.shields.io/github/stars/chainsulting/ethereum-2.0-validator-setup-guide) ![](https://img.shields.io/github/license/chainsulting/ethereum-2.0-validator-setup-guide)
 
 ## Introduction
 
