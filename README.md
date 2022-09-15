@@ -1,6 +1,6 @@
 # How to setup a fast and secure Ethereum 2.0 validator node with OVHcloud
 
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
+![]([[https://img.shields.io/github/stars/pandao/editor.md.svg](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fchainsulting%2Fethereum-2.0-validator-setup-guide)](https://img.shields.io/twitter/url?style=social)) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
 
 ## Introduction
 
