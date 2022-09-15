@@ -119,8 +119,57 @@ Transfer the public key to your remote node. Update keyname.pub appropriately.
 ssh-copy-id -i $HOME/.ssh/keyname.pub ethereum@server.public.ip.address
 ```
 
+Login with your new ethereum user
+```
+ssh ethereum@server.public.ip.address
+```
 
+Disable root login and password based login. Edit the /etc/ssh/sshd_config file
+```
+sudo nano /etc/ssh/sshd_config
+```
+```
+Locate ChallengeResponseAuthentication and update to no
+ChallengeResponseAuthentication no
 
+Locate PasswordAuthentication update to no
+PasswordAuthentication no
+
+Locate PermitRootLogin and update to prohibit-password
+PermitRootLogin prohibit-password
+
+Locate PermitEmptyPasswords and update to no
+PermitEmptyPasswords no
+
+Locate Port and customize it your random port.
+Use a random port # from 1024 thru 49141. Check for possible conflicts.
+
+Port <port number>
+```
+
+Validate the syntax of your new SSH configuration.
+```
+sudo sshd -t
+```
+
+If no errors with the syntax validation, restart the SSH process
+```
+sudo systemctl restart sshd
+```
+
+Verify the login still works and login with ssh
+```
+ssh ethereum@server.public.ip.address -p <custom port number>
+```
+
+### 2.4 Update your system
+
+It's critically important to keep your system up-to-date with the latest patches to prevent intruders from accessing your system.
+```
+sudo apt-get update -y && sudo apt dist-upgrade -y
+sudo apt-get autoremove
+sudo apt-get autoclean
+```
 
 ## Resources
 
