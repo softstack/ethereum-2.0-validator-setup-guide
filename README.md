@@ -1,4 +1,4 @@
-# How to setup a fast and secure Ethereum 2.0 validator node with OVHcloud
+# How to setup a fast and secure Ethereum 2.0 validator node with OVHcloud (WIP)
 
 ![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fchainsulting%2Fethereum-2.0-validator-setup-guide) ![](https://img.shields.io/github/issues/chainsulting/ethereum-2.0-validator-setup-guide) ![](https://img.shields.io/github/forks/chainsulting/ethereum-2.0-validator-setup-guide) ![](https://img.shields.io/github/stars/chainsulting/ethereum-2.0-validator-setup-guide) ![](https://img.shields.io/github/license/chainsulting/ethereum-2.0-validator-setup-guide)
 
@@ -330,13 +330,90 @@ To process incoming validator deposits from the execution layer (formerly 'Eth1'
 
  ![image](https://user-images.githubusercontent.com/33572557/190466176-d9ddd7d5-6ed3-4407-acd1-95c1213a4b0d.png)
 
+|      Client |      Type |      CPU Usage |      Minimum RAM Usage |      Sync Time  |
+|---|---|---|---|---|
+|     Geth    |     Full    |     Moderate    |     4 GB    |     Moderate    |
+|     Besu    |     Full    |     Moderate    |     8 GB    |     Slow    |
+|     Nethermind    |     Full    |     Moderate    |     16 GB    |     Fast    |
 
-Client Comparison Table
-Client	Type	CPU Usage	Minimum RAM Usage	Sync Time
-Geth	Full	Moderate	4 GB	Moderate
-Besu	Full	Moderate	8 GB	Slow
-Nethermind	Full	Moderate	16 GB	Fast
+**We have chosen Geth, as it’s the most stable and used client.**
 
+The easiest way to install Geth on Ubuntu-based distributions is with the built-in launchpad PPAs (Personal Package Archives). A single PPA repository is provided, containing stable and development releases for Ubuntu versions xenial, trusty, impish, focal, bionic.
+
+```
+sudo add-apt-repository -y ppa:ethereum/ethereum
+```
+```
+sudo apt-get update -y
+```
+```
+sudo apt-get install ethereum -y
+```
+
+Setup and configure systemd
+
+Run the following to create a unit file to define your eth1.service configuration.
+Simply copy/paste the following.
+
+```
+cat > $HOME/eth1.service << EOF
+[Unit]
+Description=Geth Execution Layer Client service
+Wants=network-online.target
+After=network-online.target
+[Service]
+Type=simple
+User=$USER
+Restart=on-failure
+RestartSec=3
+TimeoutSec=300
+ExecStart=/usr/bin/geth \
+--mainnet \
+--metrics \
+--pprof \
+--authrpc.jwtsecret=/secrets/jwtsecret
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+Move the unit file to /etc/systemd/system and give it permissions.
+```
+sudo mv $HOME/eth1.service /etc/systemd/system/eth1.service
+```
+```
+sudo chmod 644 /etc/systemd/system/eth1.service
+```
+
+Run the following to enable auto-start at boot time.
+```
+sudo systemctl daemon-reload
+sudo systemctl enable eth1
+```
+
+Start geth
+```
+sudo systemctl start eth1
+```
+
+**When is my geth node synched?**
+
+Your execution client is fully sync'd when these events occur.
+Geth: Imported new chain segment
+
+1.	Attach to the geth console with: geth attach<br>
+2.	Type the following: ```eth.syncing``` <br>
+3.	If it returns false, your geth node is synched.<br>
+<br>
+
+To view and follow eth1 logs
+```
+journalctl -fu eth1
+```
+
+>**Note**
+>With OVHCloud Dedicated Server Advance-1 we got a sync after 6 hours. 
+>Syncing an execution client can take up to 1 week. On high-end machines with gigabit internet, expect syncing to take less than a day.
 
 
 ## Resources
