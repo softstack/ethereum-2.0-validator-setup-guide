@@ -44,6 +44,7 @@ Using a dedicated server
 | Physical security | Risk of having unsuitable equipment  |
 
 Regarding physical security: https://docs.ovh.com/gb/en/dedicated/securing-a-dedicated-server/
+
 ### 1.3 Buy a dedicated server
 
 Go to https://www.ovhcloud.com/en/bare-metal/prices/![image](https://user-images.githubusercontent.com/33572557/190447376-5e168bc4-17b3-4cef-b231-b2c382e96883.png)
@@ -62,8 +63,24 @@ We have chosen Advance-1 Gen2 with 1Gbit/s unmetered, guaranteed traffic and eno
 
 Rent for 24 months and pay all upfront to earn in total 15% discount + free setup fee
 
-<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190448972-0b325283-0cdb-4795-8599-3099db19aab2.png">
+<img width="249" alt="image" src="https://user-images.githubusercontent.com/33572557/190449264-27ef97b5-c31a-452a-ad63-199e9039d4d4.png">
 
+It will take around 24h until the dedicated server is ready for setup
+
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190449918-da7debac-4886-4081-ae1b-f59701a11cfb.png">
+
+### 1.4 Initial Setup
+Once you got an email regarding the successful creation of the server, got to your dedicated server dashboard and start the initial setup.
+**Go to:** https://www.ovh.com/manager/#/dedicated/server/.. 
+
+<img width="450" alt="image" src="https://user-images.githubusercontent.com/33572557/190451473-a0326871-81a1-4eef-a076-da0c4b5e1a3c.png">
+
+Install the preferred OS, via “Last operating system (OS) installed by OVHcloud” 
+
+{% hint style="info" %} Note: Creating a server requires you to add an SSH Key, follow the guide https://docs.ovh.com/gb/en/dedicated/creating-ssh-keys-dedicated/ {% endhint %}
+
+We recommend **Ubuntu Server 20.04 LTS "Focal Fossa" - ubuntu2004-server 64 bit.** 
+In the last step you must set the SSH key and host name, before you are able to install the OS.
 
 
 
