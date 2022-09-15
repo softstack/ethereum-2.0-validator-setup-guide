@@ -59,7 +59,7 @@ Go to https://www.ovhcloud.com/en/bare-metal/prices/
 Advance-1 gen2 for **fast sync** and Rise-1 for **medium sync** speed, you can decide 
 
 >**Note**
-> We have chosen Advance-1 Gen2 with 1Gbit/s unmetered, guaranteed traffic and 
+> We have chosen Advance-1 Gen2 with 1Gbit/s unmetered, guaranteed traffic and
 > enough disk space to keep up with the chain increase for a while. 
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190448972-0b325283-0cdb-4795-8599-3099db19aab2.png">
@@ -73,9 +73,9 @@ It will take around 24h until the dedicated server is ready for setup
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190449918-da7debac-4886-4081-ae1b-f59701a11cfb.png">
 
 > **Note**
-> Price for an Advance-1 Gen2 Server 2816.47 € over 2 years
-> Monthly Price 117,35 €
-> Still profitable, at the current Ethereum price 
+> Price for an Advance-1 Gen2 Server 2816.47 € over 2 years<br>
+> Monthly Price 117,35 € <br>
+> Still profitable, at the current Ethereum price <br>
 >
 > https://www.stakingrewards.com/calculator/
 > <img width="1032" alt="Screenshot 2022-09-15 at 21 33 45" src="https://user-images.githubusercontent.com/33572557/190493070-b14ed292-38b5-4b6d-b457-2ea3428719c9.png">
