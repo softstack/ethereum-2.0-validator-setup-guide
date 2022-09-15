@@ -70,7 +70,7 @@ It will take around 24h until the dedicated server is ready for setup
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190449918-da7debac-4886-4081-ae1b-f59701a11cfb.png">
 
 ### 1.4 Initial Setup
-Once you got an email regarding the successful creation of the server, got to your dedicated server dashboard and start the initial setup.
+Once you got an email regarding the successful creation of the server, go to your dedicated server dashboard and start the initial setup.<br>
 **Go to:** https://www.ovh.com/manager/#/dedicated/server/.. 
 
 <img width="450" alt="image" src="https://user-images.githubusercontent.com/33572557/190451473-a0326871-81a1-4eef-a076-da0c4b5e1a3c.png">
@@ -88,11 +88,36 @@ In the last step you must set the SSH key and host name, before you are able to 
 
 ## 2. Hardening you node
 
-### 2.1 Login via SSH to your server Run the following command:
+### 2.1 Login via SSH to your server. Run the following command:
 ```
-`ssh ubuntu@162.19.19.1`
+ssh ubuntu@162.19.19.1
 ```
+### 2.2 Create a non-root user with sudo privileges. Run the following commands:
+```
+sudo useradd -m -s /bin/bash ethereum
+```
+Set the password for ethereum user
+```
+sudo passwd ethereum
+```
+Add ethereum to the sudo group
+```
+sudo usermod -aG sudo ethereum
+```
+### 2.3 Disable SSH password Authentication and Use SSH Keys only
 
+The basic rules of hardening SSH are:
+
+* No password for SSH access (use private key)
+*	Don't allow root to SSH (the appropriate users should SSH in, then su or sudo)
+*	Use sudo for users so commands are logged
+*	Log unauthorized login attempts (and consider software to block/ban users who try to access your server too many times, like fail2ban)
+*	Lock down SSH to only the ip range your require (if you feel like it)
+
+Transfer the public key to your remote node. Update keyname.pub appropriately.
+```
+ssh-copy-id -i $HOME/.ssh/keyname.pub ethereum@server.public.ip.address
+```
 
 
 
