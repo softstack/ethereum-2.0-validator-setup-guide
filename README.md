@@ -1,12 +1,6 @@
 # How to setup a fast and secure Ethereum 2.0 validator node with OVHcloud
 
-<details>
-  <summary>Table of Con</summary> 
-  
-[TOC]
-  
-</details>
-
+[TOCM]
 
 ## Introduction
 
