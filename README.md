@@ -1,5 +1,12 @@
 # How to setup a fast and secure Ethereum 2.0 validator node with OVHcloud
 
+<details>
+  <summary>Table of Con</summary> 
+  
+[TOC]
+  
+</details>
+
 
 ## Introduction
 
@@ -287,7 +294,10 @@ sudo ss -tulpn or sudo netstat -tulpn
 ## 3. Initial Setup 
 
 ### 3.1	Time Sync Check
-Run the following command: timedatectl 
+Run the following command: 
+```
+timedatectl 
+```
 
 :white_check_mark: Check if NTP Service is active.<br>
 :white_check_mark: Check if Local time, Time zone, and Universal time are all correct.<br>
@@ -319,11 +329,19 @@ openssl rand -hex 32 | tr -d "\n" | sudo tee /secrets/jwtsecret
 #enable read access
 sudo chmod 644 /secrets/jwtsecret
 ```
+
 ### 3.3	Install Execution Client
 
 To process incoming validator deposits from the execution layer (formerly 'Eth1' chain), you'll need to run an execution client as well as your consensus client (formerly 'Eth2'). You can use a third-party service like Infura, but we recommend running your own client to keep the network as decentralized as possible. Go Ethereum is one of the three original implementations (along with C++ and Python) of the Ethereum protocol. It is written in Go, fully open source and licensed under the GNU LGPL v3.
 
+ ![image](https://user-images.githubusercontent.com/33572557/190466176-d9ddd7d5-6ed3-4407-acd1-95c1213a4b0d.png)
 
+
+Client Comparison Table
+Client	Type	CPU Usage	Minimum RAM Usage	Sync Time
+Geth	Full	Moderate	4 GB	Moderate
+Besu	Full	Moderate	8 GB	Slow
+Nethermind	Full	Moderate	16 GB	Fast
 
 
 
