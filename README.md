@@ -10,6 +10,19 @@ Ethereum 2.0 is the next step in the evolution of Ethereum. It brings with it ma
 * have passed or is actively enrolled in the [Eth2 Study Master course](https://ethereumstudymaster.com)
 * and have read the [8 Things Every Eth2 validator should know.](https://medium.com/chainsafe-systems/8-things-every-eth2-validator-should-know-before-staking-94df41701487)
 
+## 1.	Prerequisites
+
+### 1.1 Recommended Hardware Setup
+•  Operating system: 64-bit Linux (i.e. Ubuntu 20.04 LTS Server or Desktop)
+•  Processor: Quad core CPU, Intel Core i7–4770 (3,40 GHz / Cores: 4 Threads: 8) or AMD FX-8310 or better
+•  Memory: 16GB DDR4 RAM or more
+•  Storage: 2TB NVMe or more, IOPS: 10,000 (medium speed) and 16,000 (fast)
+•  Internet: Broadband internet connections with speeds at least 10 Mbps without data limit.
+•  Power: Reliable electrical power with uninterruptible power supply (UPS)
+•  ETH balance: at least 32 ETH and some ETH for deposit transaction fees
+•  Wallet: Metamask installed
+
+
 
 ## Resources
 
