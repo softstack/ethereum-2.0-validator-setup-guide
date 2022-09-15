@@ -1,6 +1,6 @@
 # How to setup a fast and secure Ethereum 2.0 validator node with OVHcloud
 
-`code()`
+
 ## Introduction
 
 Ethereum 2.0 is the next step in the evolution of Ethereum. It brings with it many changes, including Proof-of-Stake, Sharding, new client implementations, new cryptography and more.
@@ -83,6 +83,16 @@ Install the preferred OS, via “Last operating system (OS) installed by OVHclou
 
 We recommend **Ubuntu Server 20.04 LTS "Focal Fossa" - ubuntu2004-server 64 bit.** 
 In the last step you must set the SSH key and host name, before you are able to install the OS.
+
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190453011-fb3bcebb-0871-4156-b95a-b92995611a79.png">
+
+## 2. Hardening you node
+
+### 2.1 Login via SSH to your server Run the following command:
+```
+`ssh ubuntu@162.19.19.1`
+```
+
 
 
 
