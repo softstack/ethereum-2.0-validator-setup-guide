@@ -171,6 +171,118 @@ sudo apt-get autoremove
 sudo apt-get autoclean
 ```
 
+Enable automatic updates so you don't have to manually install them.
+```
+sudo apt-get install unattended-upgrades 
+sudo dpkg-reconfigure -plow unattended-upgrades
+```
+
+### 2.5	Disable root account
+
+System admins should not frequently log in as root in order to maintain server security. Instead, you can use sudo execute that require low-level privileges.
+
+```
+# To disable the root account, simply use the -l option.
+sudo passwd -l root
+```
+
+```
+# If for some valid reason you need to re-enable the account, simply use the -u option.
+sudo passwd -u root
+```
+
+### 2.6 Secure Shared Memory
+One of the first things you should do is secure the shared memory used on the system. If you're unaware, shared memory can be used in an attack against a running service. Because of this, secure that portion of system memory.
+
+Edit /etc/fstab
+```
+sudo nano /etc/fstab
+```
+
+Insert the following line to the bottom of the file and save/close. This sets shared memory into read-only mode.
+```
+tmpfs    /run/shm    tmpfs    ro,noexec,nosuid    0 0
+```
+
+Reboot the node in order for changes to take effect.
+```
+sudo reboot
+```
+
+### 2.7 Install Fail2ban
+
+Fail2ban is an intrusion-prevention system that monitors log files and searches for particular patterns that correspond to a failed login attempt. If a certain number of failed logins are detected from a specific IP address (within a specified amount of time), fail2ban blocks access from that IP address.
+```
+sudo apt-get install fail2ban -y
+```
+
+Edit a config file that monitors SSH logins.
+```
+sudo nano /etc/fail2ban/jail.local
+```
+
+Add the following lines to the bottom of the file.
+```
+Whitelisting IP address tip: The ignoreip parameter accepts IP addresses, IP ranges or DNS hosts that you can specify to be allowed to connect. This is where you want to specify your local machine, local IP range or local domain, separated by spaces.
+# Example
+ignoreip = 192.168.1.0/24 127.0.0.1/8
+
+[sshd]
+enabled = true
+port = <22 or your random port number>
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+# whitelisted IP addresses
+ignoreip = <list of whitelisted IP address, your local daily laptop/pc>
+```
+
+Save/close file.
+
+Restart fail2ban for settings to take effect.
+```
+sudo systemctl restart fail2ban
+```
+
+
+### 2.8	Configure your Firewall
+
+The standard UFW firewall can be used to control network access to your node.
+With any new installation, ufw is disabled by default. Enable it with the following settings.
+
+Prysm
+
+```
+# By default, deny all incoming and outgoing traffic
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+# Allow ssh access
+sudo ufw allow ssh #<port 22 or your random ssh port number>/tcp
+# Allow p2p ports
+sudo ufw allow 13000/tcp
+sudo ufw allow 12000/udp
+# Allow eth1 port
+sudo ufw allow 30303/tcp
+sudo ufw allow 30303/udp
+# Enable firewall
+sudo ufw enable
+```
+
+> **Note**
+> It is dangerous to open 3000 / 9090 for Grafana or Prometheus on a VPS/cloud node.
+
+### 2.9	Verify Listening Ports
+
+If you want to maintain a secure server, you should validate the listening network ports every once in a while. This will provide you essential information about your network.
+
+```
+sudo ss -tulpn or sudo netstat -tulpn
+```
+
+Further tips can be found here: https://www.ubuntupit.com/best-linux-hardening-security-tips-a-comprehensive-checklist/
+
+
+
 ## Resources
 
 <details>
@@ -190,33 +302,19 @@ sudo apt-get autoclean
 * Beacon Chain: https://beaconcha.in
 </details>
 
-### Validator stats
+<details>
+  <summary>Validator stats</summary> 
+* Eth2stats: https://eth2stats.io/medalla-testnet
+</details>
 
-- Eth2stats: https://eth2stats.io/medalla-testnet
+<details>
+  <summary>Ethereum 2.0 client implementations</summary> 
+* Prysm (Go): https://github.com/prysmaticlabs/prysm
+* Lighthouse (Rust) https://github.com/sigp/lighthouse
+* Teku (Java): https://github.com/PegaSysEng/teku
+* LodeStart (TypeScript): https://github.com/ChainSafe/lodestar
+* Trinity (Python): https://github.com/ethereum/trinity
 
-## Ethereum 2.0 client implementations
+</details>
 
-- Prysm (Go): https://github.com/prysmaticlabs/prysm
-- Lighthouse (Rust) https://github.com/sigp/lighthouse
-- Teku (Java): https://github.com/PegaSysEng/teku
-- LodeStart (TypeScript): https://github.com/ChainSafe/lodestar
-- Trinity (Python): https://github.com/ethereum/trinity
 
-## Forums
-
-- Eth research: https://ethresear.ch
-- Ethereum magicians: https://ethereum-magicians.org
-
-## Spec
-
-- Ethereum 2.0 spec: https://github.com/ethereum/eth2.0-specs
-- Vitalik's annotated eth2 spec: https://github.com/ethereum/annotated-spec
-- Ben Edgington's annotated spec: https://benjaminion.xyz/eth2-annotated-spec/
-
-## Economics
-
-- Economics: https://docs.ethhub.io/ethereum-roadmap/ethereum-2.0/eth-2.0-economics/
-
-## Blogs
-
-- Ethereum blog: https://blog.ethereum.org/
