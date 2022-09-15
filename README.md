@@ -416,6 +416,358 @@ journalctl -fu eth1
 >Syncing an execution client can take up to 1 week. On high-end machines with gigabit internet, expect syncing to take less than a day.
 
 
+### 3.4	Generate your validator keys
+
+install the Ethereum Foundation deposit tool and generate your two sets of key pairs.
+
+You have the choice of downloading the pre-built Ethereum staking deposit tool or building it from source. Alternatively, if you have a Ledger Nano X/S or Trezor Model T, you're able to generate deposit files with keys managed by a hardware wallet.
+
+If using staking-deposit-cli, follow the prompts and pick a KEYSTORE password. This password encrypts your keystore files. Write down your mnemonic and keep this safe and offline.
+
+Visit and choose your operating system to generate the keys OFFLINE
+https://github.com/ethereum/staking-deposit-cli
+**Follow the CLI commands** 
+![Picture 1](https://user-images.githubusercontent.com/33572557/190485697-8a386c2b-78c6-470e-a261-3bad49b9342c.png)
+
+If you’re successfully done, you will see the rhino!
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190486084-784f4daa-117a-49e3-94a3-775ad678682e.png">
+
+>**Note**
+>Everything is now saved within the validator_keys folders, keep them as you will need the files in the next step.
+
+### 3.5 Install Consensus Client
+
+|      Client |      Type |      CPU Usage |      Minimum RAM Usage |      Sync Time  |
+|---|---|---|---|---|
+|     Geth    |     Full    |     Moderate    |     4 GB    |     Moderate    |
+|     Besu    |     Full    |     Moderate    |     8 GB    |     Slow    |
+|     Nethermind    |     Full    |     Moderate    |     16 GB    |     Fast    |
+
+
+**Install Prysm** 
+
+```
+mkdir ~/prysm && cd ~/prysm
+curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output prysm.sh && chmod +x prysm.sh
+```
+
+Configure port forwarding and/or firewall
+
+Specific to your networking setup or cloud provider settings, ensure your validator's firewall ports are open and reachable.
+
+* Prysm consensus client will use port 12000 for udp and port 13000 for tcp
+* Execution client requires port 30303 for tcp and udp
+
+>**Note**
+>You'll need to forward and open ports to your validator. 
+>Verify it's working with https://www.yougetsignal.com/tools/open-ports/ or https://canyouseeme.org/ .
+
+Import validator key
+
+```
+$HOME/prysm/prysm.sh validator accounts import --mainnet --keys-dir=$HOME/staking-deposit-cli/validator_keys
+```
+
+*	Type **"accept"** to accept terms of use
+*	Press enter to accept default wallet location
+*	Enter a new **prysm-only password** to encrypt your local prysm wallet files
+*	and enter the **keystore password** for your imported accounts.
+
+Verify your validators imported successfully.
+```
+$HOME/prysm/prysm.sh validator accounts list --mainnet
+```
+
+### 3.6 Start the beacon chain
+
+Setup systemd service
+
+Create a systemd unit file to define yourbeacon-chain.service configuration.
+```
+sudo nano /etc/systemd/system/beacon-chain.service
+```
+
+Paste the following configuration into the file.
+```
+# The eth beacon chain service (part of systemd)
+# file: /etc/systemd/system/beacon-chain.service
+
+[Unit]
+Description=eth consensus layer beacon chain service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=<USER>
+Restart=on-failure
+ExecStart=<HOME>/prysm/prysm.sh beacon-chain \
+  --mainnet \
+  --checkpoint-sync-url=https://beaconstate.info \
+  --genesis-beacon-api-url=https://beaconstate.info \
+  --execution-endpoint=http://localhost:8551 \
+  --jwt-secret=/secrets/jwtsecret \
+  --suggested-fee-recipient=0x_CHANGE_THIS_TO_MY_ETH_FEE_RECIPIENT_ADDRESS \
+  --accept-terms-of-use
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Replace0x_CHANGE_THIS_TO_MY_ETH_FEE_RECIPIENT_ADDRESS with your own Ethereum address that you control. Tips are sent to this address and are immediately spendable, unlike the validator's attestation and block proposal rewards.
+To exit and save, press Ctrl + X, then Y, thenEnter.
+Update the configuration file with your current user's home path and user name.
+```
+sudo sed -i /etc/systemd/system/beacon-chain.service -e "s:<HOME>:${HOME}:g"
+```
+```
+sudo sed -i /etc/systemd/system/beacon-chain.service -e "s:<USER>:${USER}:g"
+```
+
+Update file permissions.
+```
+sudo chmod 644 /etc/systemd/system/beacon-chain.service
+```
+Run the following to enable auto-start at boot time and then start your beacon node service.
+```
+sudo systemctl daemon-reload
+sudo systemctl enable beacon-chain
+sudo systemctl start beacon-chain
+```
+
+### 3.6 Start the validator
+Store your prysm-only password in a file and make it read-only.
+This is required so that Prysm can decrypt and load your validators.
+
+Replace <my_password_goes_here> with your prysm-only password.
+
+```
+echo '<my_password_goes_here>' > $HOME/.eth2validators/validators-password.txt
+```
+```
+sudo chmod 600 $HOME/.eth2validators/validators-password.txt
+```
+Verify your password is correct.
+```
+cat $HOME/.eth2validators/validators-password.txt
+```
+Clear the bash history in order to remove traces of your prysm-only password.
+```
+shred -u ~/.bash_history && touch ~/.bash_history
+```
+
+Setup systemd service
+Create a systemd unit file to define your validator.service configuration.
+```
+sudo nano /etc/systemd/system/validator.service
+```
+
+Paste the following configuration into the file.
+```
+# The eth validator service (part of systemd)
+# file: /etc/systemd/system/validator.service
+[Unit]
+Description=eth validator service
+Wants=network-online.target beacon-chain.service
+After=network-online.target
+[Service]
+Type=simple
+User=<USER>
+Restart=on-failure
+ExecStart=<HOME>/prysm/prysm.sh validator \
+--mainnet \
+--graffiti "<MY_GRAFFITI>" \
+--accept-terms-of-use \
+--wallet-password-file <HOME>/.eth2validators/validators-password.txt \
+--suggested-fee-recipient 0x_CHANGE_THIS_TO_MY_ETH_FEE_RECIPIENT_ADDRESS \
+--enable-doppelganger
+[Install]
+WantedBy=multi-user.target
+```
+
+*	Replace0x_CHANGE_THIS_TO_MY_ETH_FEE_RECIPIENT_ADDRESS with your own Ethereum address that you control. Tips are sent to this address and are immediately spendable, unlike the validator's attestation and block proposal rewards.
+*	Replace <MY_GRAFFITI> with your own graffiti message. However for privacy and opsec reasons, avoid personal information. Optionally, leave it blank by deleting the flag option.
+*	
+To exit and save, press Ctrl + X, then Y, thenEnter.
+
+Update the configuration file with your current user's home path and user name.
+```
+sudo sed -i /etc/systemd/system/validator.service -e "s:<HOME>:${HOME}:g"
+sudo sed -i /etc/systemd/system/validator.service -e "s:<USER>:${USER}:g"
+```
+
+Update file permissions.
+```
+sudo chmod 644 /etc/systemd/system/validator.service
+```
+
+Run the following to enable auto-start at boot time and then start your validator.
+```
+sudo systemctl daemon-reload
+sudo systemctl enable validator
+sudo systemctl start validator
+```
+
+#view and follow the log
+```
+journalctl --unit=beacon-chain -f
+```
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190487899-94e2f1c5-ecc9-4a64-a650-155c4bf023bf.png">
+
+
+#view and follow the log
+```
+journalctl --unit=validator -f
+```
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190488022-6b14d888-eea2-48c7-a5e2-2aadcb3b85b5.png">
+
+## 4.	Monitoring your validator
+
+Prometheus is a monitoring platform that collects metrics from monitored targets by scraping metrics HTTP endpoints on these targets. Official documentation is available here. Grafana is a dashboard used to visualize the collected data.
+
+
+### 4.1	Install prometheus and prometheus node exporter.
+```
+sudo apt-get install -y prometheus prometheus-node-exporter
+```
+
+### 4.2. Install grafana.
+```
+wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+echo "deb https://packages.grafana.com/oss/deb stable main" > grafana.list
+sudo mv grafana.list /etc/apt/sources.list.d/grafana.list
+sudo apt-get update && sudo apt-get install -y grafana
+```
+
+Enable services so they start automatically.
+```
+sudo systemctl enable grafana-server.service prometheus.service prometheus-node-exporter.service
+```
+
+Create the prometheus.yml config file. Choose the tab for your eth client. Simply copy and paste.
+```
+cat > $HOME/prometheus.yml << EOF
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+    monitor: 'codelab-monitor'
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+   - job_name: 'node_exporter'
+     static_configs:
+       - targets: ['localhost:9100']
+   - job_name: 'validator'
+     static_configs:
+       - targets: ['localhost:8081']
+   - job_name: 'beacon node'
+     static_configs:
+       - targets: ['localhost:8080']
+   - job_name: 'slasher'
+     static_configs:
+       - targets: ['localhost:8082']
+EOF
+```
+
+Setup prometheus for your execution client. Start by editing prometheus.yml
+```
+nano $HOME/prometheus.yml
+```
+
+Append the applicable job snippet for your execution client to the end of prometheus.yml. Save the file.
+```
+   - job_name: 'geth'
+     scrape_interval: 15s
+     scrape_timeout: 10s
+     metrics_path: /debug/metrics/prometheus
+     scheme: http
+     static_configs:
+     - targets: ['localhost:6060']
+```
+
+Move it to /etc/prometheus/prometheus.yml
+```
+sudo mv $HOME/prometheus.yml /etc/prometheus/prometheus.yml
+```
+
+Update file permissions.
+```
+sudo chmod 644 /etc/prometheus/prometheus.yml
+```
+
+Finally, restart the services.
+```
+sudo systemctl restart grafana-server.service prometheus.service prometheus-node-exporter.service
+```
+
+Verify that the services are running properly:
+```
+sudo systemctl status grafana-server.service prometheus.service prometheus-node-exporter.service
+```
+
+>**Note**
+> It is dangerous to open 3000 / 9090 for Grafana or Prometheus on a VPS/cloud node. 
+> Better to connect via wireguard to the server or setup between monitoring server and node a wireguard ssh connection
+> https://www.digitalocean.com/community/tutorials/how-to-set-up-wireguard-on-ubuntu-20-04
+
+## 5.	Maintenance 
+
+### 5.1 Updating your consensus client
+Recommended to watch the following repository https://github.com/prysmaticlabs/prysm/releases
+
+#Simply restart the processes
+```
+sudo systemctl reload-or-restart beacon-chain validator
+```
+
+Check the logs to verify the services are working properly and ensure there are no errors. 
+```
+sudo systemctl status beacon-chain validator
+sudo systemctl status beacon-chain
+```
+
+### 5.2 Updating your execution client
+
+Stop your execution client process.
+# This can take a few minutes.
+```
+sudo systemctl stop eth1
+```
+
+Update the execution client package or binaries.
+```
+sudo apt update
+sudo apt dist-upgrade -y
+```
+
+
+Check the logs to verify the services are working properly and ensure there are no errors.
+```
+sudo systemctl status eth1 beacon-chain validator
+sudo systemctl status eth1 beacon-chain
+```
+
+
+## 6. Signing up to be a validator 
+
+To be an ETH 2.0 validator, one has to make a deposit through the launchpad’s website.
+
+https://launchpad.ethereum.org/en/overview
+
+### 6.1	Check all steps before connecting to the launchpad with your Metamask wallet, review and accept terms.
+
+### 6.2	Deposit your validator amount 
+
+
+## 7. Validator duties 
+
+
+
+
 ## Resources
 
 <details>
@@ -456,4 +808,14 @@ journalctl -fu eth1
 
 </details>
 
+<details>
+  <summary>Useful links</summary> 
+
+* https://kb.beaconcha.in/staking-and-hardware
+* https://launchpad.ethereum.org/en/checklist#section-one
+* https://medium.com/simplystaking/setting-up-an-eth-2-0-validator-node-simply-staking-40b5f96a9e8d
+* https://www.coincashew.com/coins/overview-eth/guide-or-how-to-setup-a-validator-on-eth2-mainnet/part-i-installation/prerequisites
+* https://www.stakingrewards.com/calculator/
+
+</details>
 
