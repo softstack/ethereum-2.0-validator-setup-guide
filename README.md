@@ -78,7 +78,8 @@ Once you got an email regarding the successful creation of the server, go to you
 Install the preferred OS, via “Last operating system (OS) installed by OVHcloud” 
 
 > **Note**
-> Creating a server requires you to add an SSH Key, follow the guide https://docs.ovh.com/gb/en/dedicated/creating-ssh-keys-dedicated/ 
+> Creating a server requires you to add an SSH Key, follow the guide 
+> https://docs.ovh.com/gb/en/dedicated/creating-ssh-keys-dedicated/ 
 
 
 We recommend **Ubuntu Server 20.04 LTS "Focal Fossa" - ubuntu2004-server 64 bit.** 
@@ -278,8 +279,51 @@ If you want to maintain a secure server, you should validate the listening netwo
 ```
 sudo ss -tulpn or sudo netstat -tulpn
 ```
+> **Note**
+> Further tips can be found here: 
+> https://www.ubuntupit.com/best-linux-hardening-security-tips-a-comprehensive-checklist/
 
-Further tips can be found here: https://www.ubuntupit.com/best-linux-hardening-security-tips-a-comprehensive-checklist/
+
+## 3. Initial Setup 
+
+### 3.1	Time Sync Check
+Run the following command: timedatectl 
+
+:white_check_mark: Check if NTP Service is active. 
+:white_check_mark: Check if Local time, Time zone, and Universal time are all correct. 
+:white_check_mark: If NTP Service is not active, run: 
+```
+sudo timedatectl set-ntp on 
+```
+
+If you see error message Failed to set ntp: NTP not supported, you may need to install chrony or ntp package. 
+> **Note**
+> by default, VMs may disable NTP so you may need to find a work-around for your environment.
+
+
+### 3.2	Create a jwtsecret file
+
+A jwtsecret file contains a hexadecimal string that is passed to both Execution Layer client and Consensus Layer clients, and is used to ensure authenticated communications between both clients.
+
+```
+#store the jwtsecret file at /secrets
+sudo mkdir -p /secrets
+```
+
+```
+#create the jwtsecret file
+openssl rand -hex 32 | tr -d "\n" | sudo tee /secrets/jwtsecret
+```
+
+```
+#enable read access
+sudo chmod 644 /secrets/jwtsecret
+```
+### 3.3	Install Execution Client
+
+To process incoming validator deposits from the execution layer (formerly 'Eth1' chain), you'll need to run an execution client as well as your consensus client (formerly 'Eth2'). You can use a third-party service like Infura, but we recommend running your own client to keep the network as decentralized as possible. Go Ethereum is one of the three original implementations (along with C++ and Python) of the Ethereum protocol. It is written in Go, fully open source and licensed under the GNU LGPL v3.
+
+
 
 
 
