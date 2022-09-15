@@ -77,9 +77,9 @@ Once you got an email regarding the successful creation of the server, got to yo
 
 Install the preferred OS, via “Last operating system (OS) installed by OVHcloud” 
 
-{% hint style="info" %}
-Note: Creating a server requires you to add an SSH Key, follow the guide https://docs.ovh.com/gb/en/dedicated/creating-ssh-keys-dedicated/ 
-{% endhint %}
+> **Note**
+> Creating a server requires you to add an SSH Key, follow the guide https://docs.ovh.com/gb/en/dedicated/creating-ssh-keys-dedicated/ 
+
 
 We recommend **Ubuntu Server 20.04 LTS "Focal Fossa" - ubuntu2004-server 64 bit.** 
 In the last step you must set the SSH key and host name, before you are able to install the OS.
