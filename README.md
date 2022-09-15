@@ -72,6 +72,15 @@ It will take around 24h until the dedicated server is ready for setup
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190449918-da7debac-4886-4081-ae1b-f59701a11cfb.png">
 
+> **Note**
+> Price for an Advance-1 Gen2 Server 2816.47 € over 2 years
+> Monthly Price 117,35 €
+> Still profitable, at the current Ethereum price 
+>
+> https://www.stakingrewards.com/calculator/
+> <img width="1032" alt="Screenshot 2022-09-15 at 21 33 45" src="https://user-images.githubusercontent.com/33572557/190493070-b14ed292-38b5-4b6d-b457-2ea3428719c9.png">
+
+
 ### 1.4 Initial Setup
 Once you got an email regarding the successful creation of the server, go to your dedicated server dashboard and start the initial setup.<br>
 **Go to:** https://www.ovh.com/manager/#/dedicated/server/.. 
@@ -89,6 +98,9 @@ We recommend **Ubuntu Server 20.04 LTS "Focal Fossa" - ubuntu2004-server 64 bit.
 In the last step you must set the SSH key and host name, before you are able to install the OS.
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190453011-fb3bcebb-0871-4156-b95a-b92995611a79.png">
+
+### 1.5 Architecture Overview 
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190492551-632238e7-7bcb-4e75-9fad-1f5504c8ddad.png">
 
 ## 2. Hardening you node
 
