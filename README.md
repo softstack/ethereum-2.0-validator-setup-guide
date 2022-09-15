@@ -26,19 +26,16 @@ Ethereum 2.0 is the next step in the evolution of Ethereum. It brings with it ma
 
 Having your own hardware
 First solution, buy equipment optimized for our needs and run it at home.
-Benefits:
-•	Cost optimization
-•	Possibility of reselling the equipment
-If you ever want to upgrade your equipment or stop your validator activity, you will be able to recover part of your investment by reselling your purchase.
-•	Optimal participation to decentralization
-Beyond the financial reward provided by a validator, we must not forget that we are there to support a decentralized network.
-•	Physical security (OVH has no access to dedicated servers) 
-Disadvantages:
-•	Electricity and internet suppliers reliability
-As you probably know, Ethereum proof of stake algorithm will punish validators when they go offline. Rest assured this punishment remains low, around 0.3% of the stake for a week offline according to Paul Hauner’s estimates. 
-•	Price of electricity
-•	Equipment maintenance
-•	Risk of having unsuitable equipment
+
+| :white_check_mark: Benefits  | :x: Disadvantages |
+| ------------- | ------------- |
+| Cost optimization | Electricity and internet suppliers reliability  |
+| Possibility of reselling the equipment | Price of electricity |
+| Optimal participation to decentralization | Equipment maintenance  |
+| Physical security | Risk of having unsuitable equipment  |
+
+
+
 As explained above, we do not yet know what the final specs will be once the full roadmap goes into production. 
 Using a dedicated server
 Benefits:
