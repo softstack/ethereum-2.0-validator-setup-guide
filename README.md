@@ -289,9 +289,9 @@ sudo ss -tulpn or sudo netstat -tulpn
 ### 3.1	Time Sync Check
 Run the following command: timedatectl 
 
-:white_check_mark: Check if NTP Service is active. 
-:white_check_mark: Check if Local time, Time zone, and Universal time are all correct. 
-:white_check_mark: If NTP Service is not active, run: 
+:white_check_mark: Check if NTP Service is active.<br>
+:white_check_mark: Check if Local time, Time zone, and Universal time are all correct.<br>
+:white_check_mark: If NTP Service is not active, run:<br>
 ```
 sudo timedatectl set-ntp on 
 ```
