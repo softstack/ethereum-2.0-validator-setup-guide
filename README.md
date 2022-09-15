@@ -47,7 +47,7 @@ Regarding physical security: https://docs.ovh.com/gb/en/dedicated/securing-a-ded
 
 ### 1.3 Buy a dedicated server
 
-Go to https://www.ovhcloud.com/en/bare-metal/prices/![image](https://user-images.githubusercontent.com/33572557/190447376-5e168bc4-17b3-4cef-b231-b2c382e96883.png)
+Go to https://www.ovhcloud.com/en/bare-metal/prices/
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190447406-dbb77299-1632-4c54-a223-3e3b655ee025.png">
 
