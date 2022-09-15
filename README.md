@@ -3,6 +3,7 @@
 Ultimate guide about the ethereum 2.0 validator setup
 # Ethereum 2.0 resources
 
+`code()`
 ## Introduction
 
 Ethereum 2.0 is the next step in the evolution of the Ethereum platforms. It brings with it many changes, including Proof-of-Stake, Sharding, new client implementations, new cryptography and more.
