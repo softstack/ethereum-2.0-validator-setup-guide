@@ -50,8 +50,21 @@ Go to https://www.ovhcloud.com/en/bare-metal/prices/![image](https://user-images
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190447406-dbb77299-1632-4c54-a223-3e3b655ee025.png">
 
-**Compare**
+**Compare** <br>
+
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190447790-cf0b5d81-8ecb-4513-b1c8-b65549ed58ca.png">
+
+Advance-1 gen2 for fast sync and Rise-1 for medium sync speed, you can decide 
+
+We have chosen Advance-1 Gen2 with 1Gbit/s unmetered, guaranteed traffic and enough disk space to keep up with the chain increase for a while. 
+
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190448972-0b325283-0cdb-4795-8599-3099db19aab2.png">
+
+Rent for 24 months and pay all upfront to earn in total 15% discount + free setup fee
+
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190448972-0b325283-0cdb-4795-8599-3099db19aab2.png">
+
+
 
 
 
