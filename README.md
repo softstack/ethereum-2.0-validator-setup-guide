@@ -549,7 +549,7 @@ sudo systemctl enable beacon-chain
 sudo systemctl start beacon-chain
 ```
 
-### 3.6 Start the validator
+### 3.7 Start the validator
 Store your prysm-only password in a file and make it read-only.
 This is required so that Prysm can decrypt and load your validators.
 
