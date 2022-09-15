@@ -50,6 +50,9 @@ Go to https://www.ovhcloud.com/en/bare-metal/prices/![image](https://user-images
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190447406-dbb77299-1632-4c54-a223-3e3b655ee025.png">
 
+**Compare**
+<img width="452" alt="image" src="https://user-images.githubusercontent.com/33572557/190447790-cf0b5d81-8ecb-4513-b1c8-b65549ed58ca.png">
+
 
 
 ## Resources
