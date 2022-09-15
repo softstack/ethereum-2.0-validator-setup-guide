@@ -5,7 +5,8 @@
 
 Ethereum 2.0 is the next step in the evolution of Ethereum. It brings with it many changes, including Proof-of-Stake, Sharding, new client implementations, new cryptography and more.
 
-<details><summary>## Staking</summary>
+## Staking
+<details><summary>Staking</summary>
 <p>
 - Each user can run more than one validator. Each validator requires 32 ETH.
 - Validators expected to behave according to the protocol. This requires them to be online for voting, and to not attempt to sign and invalid block. To enforce these rules, validators who deviate from the protocol are slashed:
