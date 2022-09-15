@@ -298,17 +298,23 @@ Further tips can be found here: https://www.ubuntupit.com/best-linux-hardening-s
 
 <details>
   <summary>Ethereum 2.0 block explorers</summary> 
+  
 * Etherscan: https://beaconscan.com
 * Beacon Chain: https://beaconcha.in
+  
 </details>
+
 
 <details>
   <summary>Validator stats</summary> 
+  
 * Eth2stats: https://eth2stats.io/medalla-testnet
+  
 </details>
 
 <details>
   <summary>Ethereum 2.0 client implementations</summary> 
+  
 * Prysm (Go): https://github.com/prysmaticlabs/prysm
 * Lighthouse (Rust) https://github.com/sigp/lighthouse
 * Teku (Java): https://github.com/PegaSysEng/teku
