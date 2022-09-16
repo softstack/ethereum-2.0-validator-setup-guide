@@ -775,10 +775,13 @@ https://launchpad.ethereum.org/en/overview
 <img width="1040" alt="Screenshot 2022-09-15 at 21 15 33" src="https://user-images.githubusercontent.com/33572557/190490012-7fc14e86-5ae2-495d-939a-b945e3d29411.png">
 
 ### 6.2	Deposit your validator amount 
+![image](https://user-images.githubusercontent.com/33572557/190602838-da5d5035-73c0-45f1-afc2-9e6d1508be49.png)
+
+![image](https://user-images.githubusercontent.com/33572557/190602713-83c45c0f-25b6-4e48-8e7d-2686b94ea888.png)
 
 ![image](https://user-images.githubusercontent.com/33572557/190490631-53489650-d7fb-4b08-8615-a4e3df58f160.png)
 
-### 6.3 Follow on beaconcha.in the status
+### 6.3 Follow the status on beaconcha.in
 
 ![image](https://user-images.githubusercontent.com/33572557/190491124-6d865694-ecd9-4928-877a-159908f46817.png)
 
